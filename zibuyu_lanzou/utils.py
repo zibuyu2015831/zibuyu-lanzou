@@ -243,10 +243,10 @@ def re_domain(url: str):
     return match.group(1) if match else None
 
 
-def get_direct_download_url(url: str, password: str) -> str:
+def get_direct_download_url(share_url: str, password: str) -> str:
     """
     根据蓝奏云分享链接，获取下载直链
-    @param url:
+    @param share_url:
     @param password:
     @return:
     """
@@ -255,7 +255,7 @@ def get_direct_download_url(url: str, password: str) -> str:
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0"
     }
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(share_url, headers=headers)
 
     url_match = re.search(r"url\s*:\s*'(/ajaxm\.php\?file=\d+)'", response.text).group(1)
     skdklds_match = re.search(r"var\s+skdklds\s*=\s*'([^']*)';", response.text).group(1)
@@ -267,10 +267,10 @@ def get_direct_download_url(url: str, password: str) -> str:
     }
 
     headers.update({
-        "Referer": url
+        "Referer": share_url
     })
 
-    domain = re_domain(url)
+    domain = re_domain(share_url)
     response2 = requests.post(f"https://{domain}{url_match}", headers=headers, data=data)
     data = json.loads(response2.text)
     full_url = data['dom'] + "/file/" + data['url']

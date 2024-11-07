@@ -10,7 +10,6 @@ description:
 --------------------------------------------
 """
 
-from fake_useragent import UserAgent
 from zibuyu_lanzou import get_direct_download_url
 
 
@@ -19,6 +18,7 @@ def main():
         'https://wwib.lanzoul.com/iQ6S62egfmvg',
         'vArk'
     )
+    # 该文件的下载直链
     print(response)
 
 
