@@ -27,6 +27,7 @@ setup(
     author='子不语',
     packages=find_packages('./zibuyu_lanzou'),
     license='MIT',
+    url='https://github.com/zibuyu2015831/zibuyu-lanzou',
     package_dir={'': './zibuyu_lanzou'},
     keywords=['zibuyu', 'zibuyu_lanzou', 'lanzou'],
     classifiers=[
